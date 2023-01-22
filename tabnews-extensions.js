@@ -1,5 +1,5 @@
 /**
- TabNews Extensions - build alpha v0.0.1
+ TabNews Extensions - build alpha v0.0.2
 
   __  __      _____          ______
  |  \/  |    / ____|        |____  |
@@ -25,7 +25,7 @@
 // ==UserScript==
 // @name         tabnews-extensions
 // @namespace    https://github.com/MrSev7en/tabnews-extensions/
-// @version      0.0.1
+// @version      0.0.2
 // @description  Attempt to extend tabnews.com.br functions.
 // @author       @MrSev7en
 // @match        https://www.tabnews.com.br/*
@@ -377,11 +377,11 @@ class SearchExtension extends Extension {
         );
       }
 
-      this.createExtensionContainerModalResponseLoad();
+      this.createExtensionContainerModalResponseLoad(false, this.searchingPage > 1);
     } else {
       this.clearExtensionContainerModal();
       this.createExtensionContainerModalSearchNotFound();
-      this.createExtensionContainerModalResponseLoad(true);
+      this.createExtensionContainerModalResponseLoad(true, this.searchingPage > 1);
     }
   }
 
@@ -407,31 +407,62 @@ class SearchExtension extends Extension {
 
   /**
    * @param {boolean} autoMargin
+   * @param {boolean} backButtonEnabled
    */
-  createExtensionContainerModalResponseLoad(autoMargin) {
+  createExtensionContainerModalResponseLoad(autoMargin, backButtonEnabled) {
     const modal = document.getElementById('tabnews-extensions@search-modal');
-    const button = document.createElement('button');
+    const collection = document.createElement('div');
+    const backButton = document.createElement('button');
+    const nextButton = document.createElement('button');
 
-    button.style.background = '#24292f';
-    button.style.color = '#fff';
-    button.style.width = 'fit-content';
-    button.style.padding = '8px 16px';
-    button.style.border = 'none';
-    button.style.borderRadius = '6px';
-    button.style.outline = 'none';
-    button.style.cursor = 'pointer';
+    collection.style.display = 'flex';
+    collection.style.flexDirection = 'row';
+    collection.style.gap = '0.5em';
+
+    backButton.style.background = '#24292f';
+    backButton.style.color = '#fff';
+    backButton.style.width = 'fit-content';
+    backButton.style.padding = '8px 16px';
+    backButton.style.border = 'none';
+    backButton.style.borderRadius = '6px';
+    backButton.style.outline = 'none';
+    backButton.style.cursor = 'pointer';
+
+    nextButton.style.background = '#24292f';
+    nextButton.style.color = '#fff';
+    nextButton.style.width = 'fit-content';
+    nextButton.style.padding = '8px 16px';
+    nextButton.style.border = 'none';
+    nextButton.style.borderRadius = '6px';
+    nextButton.style.outline = 'none';
+    nextButton.style.cursor = 'pointer';
 
     if (autoMargin) {
-      button.style.margin = '0 auto auto auto';
+      collection.style.margin = '0 auto auto auto';
     } else {
-      button.style.margin = '0 auto';
+      collection.style.margin = '0 auto';
     }
 
-    button.innerHTML = 'Procurar na próxima página';
+    backButton.innerHTML = 'Voltar para página anterior';
+    nextButton.innerHTML = 'Procurar na próxima página';
 
-    modal.appendChild(button);
+    if (backButtonEnabled) collection.appendChild(backButton);
+    collection.appendChild(nextButton);
 
-    button.addEventListener('click', async () => {
+    modal.appendChild(collection);
+
+    if (backButtonEnabled) {
+      backButton.addEventListener('click', async () => {
+        this.clearExtensionContainerModal();
+        this.showExtensionContainerModal();
+        this.createExtensionContainerModalSearch();
+
+        this.searchingPage -= 1;
+        await this.fetchExtensionContainerModalResponses(this.searchingPage, this.searchType);
+      });
+    }
+
+    nextButton.addEventListener('click', async () => {
       this.clearExtensionContainerModal();
       this.showExtensionContainerModal();
       this.createExtensionContainerModalSearch();
