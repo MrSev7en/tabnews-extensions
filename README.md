@@ -41,4 +41,4 @@
 
 ## License
 
-This project was based on [MIT](https://github.com/MrSev7en/tabnews-extensions/blob/master/LICENSE) license.
+This project was based on [MIT](https://github.com/MrSev7en/tabnews-extensions/blob/main/LICENSE) license.
