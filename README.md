@@ -30,9 +30,9 @@ Paste all copied code or downloaded and put inside "new script", save it and don
 
 ## Screenshots
 
-![Searching test 1](https://cdn.discordapp.com/attachments/1045769023847149580/1066837404444536972/image.png)
+![Searching test 1](https://cdn.discordapp.com/attachments/1045769023847149580/1066837232792649788/image.png)
 
-![Searching test 2](https://cdn.discordapp.com/attachments/1045769023847149580/1066837232792649788/image.png)
+![Searching test 2](https://cdn.discordapp.com/attachments/1045769023847149580/1066844035303612566/image.png)
 
 ## Issues
 
