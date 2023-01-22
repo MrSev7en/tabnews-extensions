@@ -18,12 +18,17 @@
 - Search based on relevant or recent tabs
 - Full responsive between any screen size
 
-### Compatibility
+## Compatibility
 
 - Tested successfully with [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
 - A unofficial test with [Greasemonkey](https://addons.mozilla.org/firefox/addon/greasemonkey/) worked successfully, try for yourself
 
-### Screenshots
+## Installation
+
+Download the script, or [click here to copy](https://raw.githubusercontent.com/MrSev7en/tabnews-extensions/main/tabnews-extensions.js), open Tampermonkey or Greasemonkey and click to add a new script.\
+Paste all copied code or downloaded and put inside "new script", save it and done!
+
+## Screenshots
 
 ![Searching test 1](https://cdn.discordapp.com/attachments/1045769023847149580/1066837404444536972/image.png)
 
